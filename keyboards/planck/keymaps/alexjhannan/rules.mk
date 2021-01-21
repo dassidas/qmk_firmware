@@ -1,0 +1,5 @@
+SRC += muse.c
+AUDIO_ENABLE = yes
+AUDIO_DRIVER = dac_basic
+AUDIO_PIN_ALT = A4
+MOUSEKEY_ENABLE = yes
