@@ -211,7 +211,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        rgblight_sethsv(20, 255, 255);
+        rgblight_sethsv(210, 255, 128);
         set_single_persistent_default_layer(_QWERTY);
       }
       return false;
@@ -224,7 +224,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case DVORAK:
       if (record->event.pressed) {
-        rgblight_sethsv(80, 255, 255);
+        rgblight_sethsv(210, 255, 255);
         set_single_persistent_default_layer(_DVORAK);
       }
       return false;
@@ -283,7 +283,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case MOUSE:
       if (record->event.pressed) {
-        rgblight_sethsv(210, 255, 255);
+        rgblight_sethsv(20, 255, 255);
         set_single_persistent_default_layer(_MOUSE);
       }
       return false;
