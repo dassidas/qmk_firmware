@@ -183,10 +183,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_GAME] = LAYOUT_planck_grid(
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT,
-    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    QWERTY,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_GRV,  KC_4,    KC_2,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,    _______,    KC_BSPC,
+    KC_TAB,  KC_1,    KC_W,    KC_3,    KC_Q,    _______,    _______,    _______,    _______,    _______,    _______,    KC_QUOT,
+    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_E,    _______,    _______,    _______,    _______,    _______,    _______, KC_ENT,
+    KC_G,  KC_T, KC_F, KC_R, KC_SPC,   KC_SPC,  RAISE,  QWERTY,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 [_MOUSE] = LAYOUT_planck_grid(
@@ -224,7 +224,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case DVORAK:
       if (record->event.pressed) {
-        rgblight_sethsv(210, 255, 255);
+        rgblight_sethsv(210, 128, 255);
         set_single_persistent_default_layer(_DVORAK);
       }
       return false;
@@ -276,14 +276,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case GAME:
       if (record->event.pressed) {
-        rgblight_sethsv(150, 255, 255);
+        rgblight_sethsv(210, 255, 255);
         set_single_persistent_default_layer(_GAME);
       }
       return false;
       break;
     case MOUSE:
       if (record->event.pressed) {
-        rgblight_sethsv(20, 255, 255);
+        rgblight_sethsv(190, 255, 255);
         set_single_persistent_default_layer(_MOUSE);
       }
       return false;
