@@ -18,7 +18,7 @@
 #include "muse.h"
 
 
-#define MOUSEKEY_INTERVAL    6
+#define MOUSEKEY_INTERVAL    3
 #define MOUSEKEY_DELAY       0
 #define MOUSEKEY_TIME_TO_MAX 60
 #define MOUSEKEY_WHEEL_DELAY 0
@@ -190,9 +190,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_MOUSE] = LAYOUT_planck_grid(
-    KC_TAB,  _______,    _______,    _______,    _______,    _______,    _______,    _______,  KC_MS_U,   _______,   _______,    _______,
+    KC_TAB,  _______,    _______,    _______,    _______,    _______,    _______,    KC_MS_BTN1,  KC_MS_U,   KC_MS_BTN2,   _______,    _______,
     KC_ESC,  _______,    _______,    _______,    _______,    _______,    _______,    KC_MS_L,     KC_MS_D,   KC_MS_R,    _______, _______,
-    KC_LSFT, KC_ACL0,    KC_ACL1,    KC_ACL2,    _______,    _______,    _______,    _______,     _______,   _______,    KC_ACL2, _______ ,
+    KC_LSFT, KC_ACL0,    KC_ACL1,    KC_ACL2,    KC_MS_BTN4,    KC_MS_BTN5,    _______,    KC_WH_D,     _______,   KC_WH_U,    KC_ACL2, _______ ,
     QWERTY,  KC_LCTL, KC_LALT, KC_LGUI, QWERTY,   KC_MS_BTN2,  KC_MS_BTN1,     RAISE,       KC_WH_L,   KC_WH_D,    KC_WH_U,   KC_WH_R
 )
 
