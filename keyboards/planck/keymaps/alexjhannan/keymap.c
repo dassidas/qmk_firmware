@@ -29,12 +29,12 @@ enum planck_layers {
   _QWERTY,
   _COLEMAK,
   _DVORAK,
+  _GAME,
+  _MOUSE,
   _LOWER,
   _RAISE,
   _PLOVER,
-  _ADJUST,
-  _GAME,
-  _MOUSE
+  _ADJUST
 };
 
 enum planck_keycodes {
