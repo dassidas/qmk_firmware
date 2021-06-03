@@ -7,6 +7,7 @@
 #define _ADJUST 3
 #define _GAME 4
 #define _GAMEMOD 5
+#define _CHAT 6
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -14,7 +15,10 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   GAME,
-  GAMEMOD
+  GAMEMOD,
+  CHAT,
+  EXITCHATENTER,
+  EXITCHATESCAPE
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -83,9 +87,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
       KC_LCTL,  KC_G,    KC_A,    KC_S,    KC_D,    KC_F,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
    //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_LSFT,  KC_B,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_LALT,           QWERTY,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+      KC_LSFT,  KC_B,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_LALT,           CHAT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
    //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                     KC_LGUI, GAMEMOD,  KC_SPC,                    KC_SPC,  RAISE,   KC_RALT
+                                     KC_LGUI, GAMEMOD,  KC_SPC,                    KC_SPC,  RAISE,   QWERTY
                                  // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -101,7 +105,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  )
+  ),
+
+   [_CHAT] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     EXITCHATESCAPE,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                               KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT,           EXITCHATENTER,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    KC_LGUI, LOWER,   KC_SPC,                    KC_SPC,  RAISE,   KC_RALT
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -136,17 +155,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-   case GAME:
+    case GAME:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_GAME);
       }
       return false;
       break;
-   case GAMEMOD:
+    case GAMEMOD:
       if (record->event.pressed) {
         layer_on(_GAMEMOD);
       } else {
         layer_off(_GAMEMOD);
+      }
+      return false;
+      break;
+    case CHAT:
+      if (record->event.pressed) {
+         SEND_STRING(SS_TAP(X_ENT));
+         set_single_persistent_default_layer(_CHAT);
+      }
+      return false;
+      break;
+    case EXITCHATENTER:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_ENT));
+        set_single_persistent_default_layer(_GAME);
+      }
+      return false;
+      break;
+    case EXITCHATESCAPE:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_ESC));
+        set_single_persistent_default_layer(_GAME);
       }
       return false;
       break;
