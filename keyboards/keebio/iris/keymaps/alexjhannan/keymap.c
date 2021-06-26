@@ -15,7 +15,6 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   GAMEMOD,
-  ALT_QWERTY,
   CHAT_ENT,
   CHAT_SLSH,
   XCHAT_ENT,
@@ -46,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
       KC_LCTL,  KC_G,    KC_A,    KC_S,    KC_D,    KC_F,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
    //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_LSFT,  KC_B,    KC_Z,    KC_X,    KC_C,    KC_V,  ALT_QWERTY,        CHAT_ENT,  KC_N,    KC_M,   KC_COMM, KC_DOT, CHAT_SLSH, KC_RSFT,
+      KC_LSFT,  KC_B,    KC_Z,    KC_X,    KC_C,    KC_V,   KC_LALT,          CHAT_ENT,  KC_N,    KC_M,   KC_COMM, KC_DOT, CHAT_SLSH, KC_RSFT,
    //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                      KC_LGUI, GAMEMOD,  KC_SPC,                    KC_SPC,  RAISE,   QWERTY
                                  // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -133,12 +132,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case ALT_QWERTY:
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_LALT));
-        rgblight_sethsv_noeeprom(HSV_MAGENTA);
-        set_single_persistent_default_layer(_QWERTY);
-      }
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
