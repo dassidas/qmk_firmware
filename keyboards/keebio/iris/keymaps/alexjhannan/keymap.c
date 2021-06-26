@@ -127,7 +127,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        rgblight_sethsv_noeeprom(HSV_MAGENTA);
+        rgblight_sethsv_noeeprom(HSV_CORAL);
         set_single_persistent_default_layer(_QWERTY);
       }
       return false;
@@ -214,5 +214,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void keyboard_post_init_user(void) {
   rgblight_enable_noeeprom(); // Enables RGB, without saving settings
   rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
-  rgblight_sethsv_noeeprom(HSV_MAGENTA); // QWERTY = blue
+  rgblight_sethsv_noeeprom(HSV_CORAL);
 }
